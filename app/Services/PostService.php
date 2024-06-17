@@ -12,13 +12,13 @@ class PostService
 
     public function showPost($request, $slug)
     {
-        $item = Post::where('slug', $slug)->with('categories')->firstOrFail();
+        $item = Post::where('slug', $slug)->with('category')->firstOrFail();
         return $item;
     }
 
     public function showPosts()
     {
-        $newses = Post::with('categories')->get();
+        $newses = Post::with('category')->get();
         return $newses;
     }
     public function update($data, $id)
@@ -39,7 +39,8 @@ class PostService
             $updateData = [
                 'category_id' => $data['category_id'],
                 'title' => $data['title'],
-                'text' => $data['text'],
+                'text_ru' => $data['text_ru'],
+                'text_uz' => $data['text_uz'],
             ];
 
             if (isset($url)) {
@@ -66,16 +67,12 @@ class PostService
                 $data['thumbnail'] = str_replace('public/', 'storage/', $thumbnailPath);
                 $url = url($data['thumbnail']);
             }
-            $text = [
-                'ru' => $data['text_ru'],
-                'uz' => $data['text_uz'],
-            ];
-            $text = json_encode($text);
 
             $new = Post::create([
                 'category_id' => $data['category_id'],
                 'title' => $data['title'],
-                'text' => $text,
+                'text_ru' => $data['text_ru'],
+                'text_uz' => $data['text_uz'],
                 'thumbnail' => $url,
             ]);
 

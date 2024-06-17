@@ -3,17 +3,17 @@
 namespace App\Services;
 
 use App\Models\Post;
-use App\Models\PostCategory;
+use App\Models\Category;
 use Illuminate\Support\Facades\Storage;
 
 use Illuminate\Support\Facades\DB;
 
-class PostCategorService
+class CategoryService
 {
     public function updateCategory($data, $id)
     {
         return DB::transaction(function () use ($data, $id) {
-            $category = PostCategory::findOrFail($id);
+            $category = Category::findOrFail($id);
 
             if (request()->hasFile('image')) {
                 $oldImage = $category->image;
@@ -72,20 +72,20 @@ class PostCategorService
                 'user_id' => $data['user_id'],
             ];
 
-            $category = PostCategory::create($categoryData);
+            $category = Category::create($categoryData);
             return $category;
         });
     }
 
     public function showCategories()
     {
-        $categories = PostCategory::all();
+        $categories = Category::all();
         return $categories;
     }
 
     public function deleteCategory($id)
     {
-        $category = PostCategory::find($id);
+        $category = Category::find($id);
         $new = Post::where('category_id', $category->id)->delete();
 
         return $category->delete();

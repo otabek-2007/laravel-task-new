@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
 
-class PostCategory extends Model
+class Category extends Model
 {
     use HasFactory;
 
@@ -20,12 +20,12 @@ class PostCategory extends Model
 
     protected static function booted(): void
     {
-        static::creating(function (PostCategory $model) {
+        static::creating(function (Category $model) {
             $model->slug = self::generateUniqueSlug($model->name);
         });
     }
 
-    protected function generateUniqueSlug($name)
+    public static function generateUniqueSlug($name)
     {
         $slug = Str::slug($name);
         $originalSlug = $slug;

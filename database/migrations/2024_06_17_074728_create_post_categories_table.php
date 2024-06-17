@@ -10,7 +10,7 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::create('post_categories', function (Blueprint $table) {
+        Schema::create('categories', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id')->foreign('user_id')->references('id')->on('users')->onDelete('restrict');
             $table->string('name');
@@ -26,6 +26,6 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::dropIfExists('post_categories');
+        Schema::dropIfExists('categories');
     }
 };

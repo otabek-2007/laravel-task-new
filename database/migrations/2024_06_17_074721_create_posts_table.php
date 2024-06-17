@@ -12,10 +12,10 @@ return new class extends Migration {
     {
         Schema::create('posts', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('category_id')->foreign('category_id')->references('id')->on('new_categories')->onDelete('restrict');
-            $table->dateTime('store_date')->now();
+            $table->unsignedBigInteger('category_id')->foreign('category_id')->references('id')->on('categories')->onDelete('restrict');
             $table->string('title');
-            $table->json('text');
+            $table->string('text_ru')->nullable()->default('post_ru');
+            $table->string('text_uz')->nullable()->default('post_uz');
             $table->string('slug')->unique();
             $table->string('thumbnail')->nullable();
             $table->timestamps();

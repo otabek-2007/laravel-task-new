@@ -39,22 +39,22 @@ class PostRequest extends FormRequest
     public function storePost(): array
     {
         return [
-            'category_id' => ['required', 'numeric', 'exists:new_categories,id'],
+            'category_id' => ['required', 'numeric', 'exists:categories,id'],
             'title' => ['required', 'string', 'max:255'],
-            'text_ru' => ['required', 'string'],
-            'text_uz' => ['required', 'string'],
-            'thumbnail' => ['nullable', 'file', 'mimetypes:video/mp4,video/quicktime', 'max:20480'],
+            'text_ru' => ['nullable', 'sometimes', 'string'],
+            'text_uz' => ['nullable', 'sometimes', 'string'],
+            'thumbnail' => ['nullable', 'file', 'mimetypes:video/mp4,music/mp3,video/quicktime', 'max:20480'],
         ];
-
     }
     public function updatePost(): array
     {
         return [
+            'category_id' => ['required', 'numeric', 'exists:categories,id'],
             'title' => ['required', 'string', 'max:255'],
-            'text' => ['required', 'string'],
-            'thumbnail' => ['nullable', 'file', 'mimetypes:video/mp4,video/quicktime', 'max:20480'],
+            'text_ru' => ['nullable', 'sometimes', 'string'],
+            'text_uz' => ['nullable', 'sometimes', 'string'],
+            'thumbnail' => ['nullable', 'file', 'mimetypes:video/mp4,music/mp3,video/quicktime', 'max:20480'],
         ];
-
     }
 
     public function storeCategory(): array

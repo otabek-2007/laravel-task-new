@@ -13,8 +13,8 @@ class Post extends Model
     protected $fillable = [
         'category_id',
         'title',
-        'text',
-        'store_date',
+        'text_ru',
+        'text_uz',
         'slug',
         'video',
         'thumbnail'
@@ -29,7 +29,7 @@ class Post extends Model
 
     public function category()
     {
-        return $this->belongsTo(PostCategory::class, 'category_id');
+        return $this->belongsTo(Category::class, 'category_id');
     }
 
     public static function generateUniqueSlug($title)

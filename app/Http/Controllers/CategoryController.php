@@ -3,29 +3,29 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\PostRequest;
-use App\Services\PostCategorService;
+use App\Services\CategoryService;
 use Illuminate\Http\Request;
 
-class PostCategoryController extends Controller
+class CategoryController extends Controller
 {
     public function showCategories()
     {
-        $categories = (new PostCategorService)->showCategories();
+        $categories = (new CategoryService)->showCategories();
         return $this->sendResponse($categories);
     }
     public function destroyCategory($id)
     {
-        $deleted = (new PostCategorService)->deleteCategory($id);
+        $deleted = (new CategoryService)->deleteCategory($id);
         return $this->sendResponse($deleted);
     }
     public function storeCategory(PostRequest $request)
     {
-        $category = (new PostCategorService)->storeCategory($request->all());
+        $category = (new CategoryService)->storeCategory($request->all());
         return $this->sendResponse($category);
-    } 
+    }
     public function updateCategory(PostRequest $request, $id)
     {
-        $category = (new PostCategorService)->updateCategory($request->all(), $id);
+        $category = (new CategoryService)->updateCategory($request->all(), $id);
         return $this->sendResponse($category);
-    } 
+    }
 }
